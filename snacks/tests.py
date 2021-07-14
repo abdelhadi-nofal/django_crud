@@ -48,3 +48,22 @@ class SnackTests(TestCase):
         self.assertEqual(response.status_code,200)
         self.assertContains(response,'Testing t')
         self.assertEqual(200,get_response.status_code)
+
+    def test_snack_list_view(self):
+        response = self.client.get(reverse('snack'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_snack_details_view(self):
+        response = self.client.get(reverse('snackdetail', args='1'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_snack_update_view(self):
+        response = self.client.post(reverse('snackupdate', args='1'), {
+            'name': 'werr',
+        })
+        self.assertEqual(response.status_code, 200)
+        
+    def test_delete_view(self):
+        response = self.client.get(reverse('snackdelete', args='1'))
+        self.assertEqual(response.status_code, 200)
+        
